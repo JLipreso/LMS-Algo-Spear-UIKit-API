@@ -10,6 +10,6 @@ export function APIHost() {
 
 export function SystemConnections() {
     return {
-        CONN_NPM_LMS: "npm_base",
+        CONN_NPM_LMS: "npm_lms",
     }
 }

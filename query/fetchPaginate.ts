@@ -1,25 +1,16 @@
-import { type QueryFetchPaginateProps } from "../utility-types/types"
 import { APIHost } from "../config";
 import $ from 'jquery';
 import { printDevLog } from "../utility/console";
 import { toRaw } from "vue";
 
-/**
- * 
-await queryFetchPaginate({
-    connection: 'npm_base',
-    table: 'menu_item',
-    where: [
-        ['dataid','>', 0]
-    ],
-    orderby: ['name','asc'],
-    per_page: 25,
-    page_no: 1
-}).then( async (response) => {
-    console.log();
-});
-
-*/
+export type QueryFetchPaginateProps = {
+    connection: string,
+    table: string,
+    where: any,
+    orderby: any,
+    per_page?: number,
+    page_no?: number
+};
 
 export async function queryFetchPaginate({ connection, table, where, orderby, per_page = 25, page_no = 1 }: QueryFetchPaginateProps ):Promise<any>  {
     return new Promise( async (resolve) => {

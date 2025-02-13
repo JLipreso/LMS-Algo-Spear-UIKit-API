@@ -1,26 +1,13 @@
-import { type QueryInsertGetIDProps } from "../utility-types/types"
 import { APIHost } from "../config";
 import $ from 'jquery';
 import { printDevLog } from "../utility/console";
 import { toRaw } from "vue";
 
-/*
-
-await queryInsertGetID({
-    connection: 'npm_base',
-    table: 'project',
-    columns: {
-        "project_refid": "project_refid",
-        "project_token": "project_token"
-    }
-})
-.then( async (response) => {
-    this.insert = toRaw(response);
-});
-
-
-
-*/
+export type QueryInsertGetIDProps = {
+    connection: string,
+    table: string,
+    columns: any
+};
 
 export async function queryInsertGetID({ connection, table, columns }: QueryInsertGetIDProps ):Promise<any>  {
     return new Promise( async (resolve) => {

@@ -1,22 +1,13 @@
-import { type QueryDeleteProps } from "../utility-types/types"
 import { APIHost } from "../config";
 import $ from 'jquery';
 import { printDevLog } from "../utility/console";
 import { toRaw } from "vue";
 
-/*
-
-var args = {
-    connection: connection,
-    table: table,
-    where: JSON.stringify(where)
+export type QueryDeleteProps = {
+    connection: string,
+    table: string,
+    where: any
 };
-        
-await fetch(APIHost() + "util_query/delete?" + $.param(args)).then( res => res.json()).then((response) => {
-    return resolve(response);
-});
-
-*/
 
 export async function queryDelete({ connection, table, where }: QueryDeleteProps ):Promise<any>  {
     return new Promise( async (resolve) => {

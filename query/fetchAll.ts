@@ -1,8 +1,14 @@
-import { type QueryFetchAllProps } from "../utility-types/types"
 import { APIHost } from "../config";
 import { URIParam } from "../utility/format";
 import { printDevLog } from "../utility/console";
 import { toRaw } from "vue";
+
+export type QueryFetchAllProps = {
+    connection: string,
+    table: string,
+    where: any,
+    orderby: any
+};
 
 export async function queryFetchAll({ connection, table, where, orderby }: QueryFetchAllProps ):Promise<any>  {
     
