@@ -22,3 +22,7 @@ export * from './users_admin/fetchPaginate';
 
 export * from './users_student/authentication';
 export * from './users_student/fetchPaginate';
+
+export * from './video_group/fetchAll';
+
+export * from './video_tutorial/create';
