@@ -17,4 +17,5 @@ export * from './utility/token';
 export * from './config';
 export * from './message';
 
+export * from './users_admin/authentication';
 export * from './users_student/authentication';
