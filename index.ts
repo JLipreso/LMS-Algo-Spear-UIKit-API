@@ -18,4 +18,7 @@ export * from './config';
 export * from './message';
 
 export * from './users_admin/authentication';
+export * from './users_admin/fetchPaginate';
+
 export * from './users_student/authentication';
+export * from './users_student/fetchPaginate';
