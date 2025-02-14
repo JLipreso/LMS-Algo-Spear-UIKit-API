@@ -2,10 +2,10 @@ import jlconfig from "@/jlconfig.json";
 
 export function APIHost() {
     /**
-     * Live:    https://api-services.jlipreso.com/ver-1/public/api/
+     * Live:    https://student.jlipreso.com/algospear/laravel/public/api/
      * Local:   http://127.0.0.1:8000/api/
      */
-    return "http://127.0.0.1:8000/api/";
+    return "https://student.jlipreso.com/algospear/laravel/public/api/";
 }
 
 export function SystemConnections() {
