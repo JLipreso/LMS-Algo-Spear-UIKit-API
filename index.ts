@@ -1,4 +1,3 @@
-
 export * from './query/delete';
 export * from './query/fetchAll';
 export * from './query/fetchSingle';
