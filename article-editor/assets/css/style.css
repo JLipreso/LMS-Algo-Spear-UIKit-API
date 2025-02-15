@@ -1,7 +1,30 @@
+:root {
+    --jl-toolbar-heigt: 36px;
+    --jl-toolbar-color: black;
+}
 .jl-elem-reset {
     padding: 0;
     margin: 0;
     border: none;
     background-color: transparent;
-    font-size: 0.80rem;
+    font-size: 0.82rem;
+    height: var(--jl-toolbar-heigt);
+    color: var(--jl-toolbar-color);
+}
+.jl-toolbar-container {
+    border: 1px solid #d9dee3;
+    margin-bottom: 5px;
+    height: var(--jl-toolbar-heigt);
+}
+.jl-toolbar-container-divider {
+    width: 1px;
+    height: var(--jl-toolbar-heigt);
+    background-color: #d9dee3;
+}
+.jl-tool-wrapper {
+    height: var(--jl-toolbar-heigt);
+}
+.jl-tool-label {
+    line-height: var(--jl-toolbar-heigt);
+    color: var(--jl-toolbar-color);
 }
