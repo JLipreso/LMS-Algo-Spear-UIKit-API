@@ -1,5 +1,8 @@
 export * from './article/create';
+export * from './article/delete';
 export * from './article/fetchAll';
+export * from './article/fetchSingle';
+export * from './article/update';
 export * from './article_topic/fetchAll';
 export * from './query/delete';
 export * from './query/fetchAll';
@@ -7,6 +10,7 @@ export * from './query/fetchSingle';
 export * from './query/fetchPaginate';
 export * from './query/insertGetID';
 export * from './query/update';
+export * from './questionnaire/create';
 export * from './utility/console';
 export * from './utility/currency';
 export * from './utility/format';

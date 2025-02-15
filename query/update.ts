@@ -1,5 +1,6 @@
 import { APIHost } from "../config";
 import $ from 'jquery';
+import { printDevLog } from "../utility/console";
 
 export type QueryUpdateProps = {
     connection: string,
@@ -19,7 +20,9 @@ export async function queryUpdate({ connection, table, where, columns }: QueryUp
         };
         
         var uri = APIHost() + "util_query/update?" + $.param(args);
+        printDevLog("Update", uri);
         await fetch(uri).then( res => res.json()).then((response) => {
+            printDevLog("Response", response);
             return resolve(response);
         });
     });

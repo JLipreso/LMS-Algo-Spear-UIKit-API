@@ -35,7 +35,7 @@
       <div class="jl-toolbar-container-divider"></div>
       <button class="jl-elem-reset p-2" @click="onAddImage">Image</button>
     </div>
-    <div :id="editor_id" class="form-control" :contenteditable="true" style="height: 400px;overflow: auto;"></div>
+    <div :id="editor_id" class="form-control" v-html="editor.div" :contenteditable="true" style="height: 400px;overflow: auto;"></div>
   </div>
 </template>
 <script lang="ts">
@@ -56,15 +56,17 @@
       reset: {
         default: 0,
         type: Number
+      },
+      value: {
+        default: "",
+        type: String
       }
     },
     data() {
       return {
         editor: {
-          text_area: "",
           div: ""
         },
-        view_type: "div",
         text_font: 'Arial',
         color_text: 'black',
         color_background: 'white',
@@ -107,8 +109,10 @@
       reset: function () {
         if(this.reset > 0) {
           this.editor.div         = '';
-          this.editor.text_area   = '';
         }
+      },
+      value: function () {
+        this.editor.div           = this.value;
       },
       color_text: function () {
         applyTextColor({ color: this.color_text });
