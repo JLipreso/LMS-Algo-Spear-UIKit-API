@@ -11,6 +11,8 @@ export * from './query/fetchPaginate';
 export * from './query/insertGetID';
 export * from './query/update';
 export * from './questionnaire/create';
+export * from './questionnaire/update';
+export * from './questionnaire/fetchPaginate';
 export * from './utility/console';
 export * from './utility/currency';
 export * from './utility/format';
