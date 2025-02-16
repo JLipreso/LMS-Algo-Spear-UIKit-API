@@ -1,9 +1,8 @@
 import { SystemConnections } from "../config";
-import { queryInsertGetID } from "../query/insertGetID";
 import { queryUpdate } from "../query/update";
-import { createReferenceID } from "../utility/reference_id";
 
 export type QuestionnaireUpdateProps = {
+    category_refid: String,
     question_refid: String,
     question: String, 
     is_choices: Number, 
@@ -15,7 +14,7 @@ export type QuestionnaireUpdateProps = {
     created_by: String
 };
 
-export async function updateQuestionnaire({ question_refid, question, is_choices, choice_a, choice_b, choice_c, choice_d, answer, created_by }:QuestionnaireUpdateProps):Promise<any> {
+export async function updateQuestionnaire({ category_refid, question_refid, question, is_choices, choice_a, choice_b, choice_c, choice_d, answer, created_by }:QuestionnaireUpdateProps):Promise<any> {
     return new Promise( async (resolve) => {
         await queryUpdate({
             connection: SystemConnections()['CONN_NPM_LMS'],
@@ -24,6 +23,7 @@ export async function updateQuestionnaire({ question_refid, question, is_choices
                 ['question_refid', question_refid]
             ],
             columns: [
+                {'category_refid':category_refid},
                 {'question':question},
                 {'is_choices':is_choices},
                 {'choice_a':choice_a},

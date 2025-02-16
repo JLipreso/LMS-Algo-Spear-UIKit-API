@@ -25,7 +25,7 @@ export async function userAdminSignIn({ email, password }:AdminSigninProps):Prom
         else {
             await queryFetchSingle({
                 connection: SystemConnections()['CONN_NPM_LMS'], 
-                table: 'users_student', 
+                table: 'users_admin', 
                 where: [
                     ['email', email],
                     ['password', password]
