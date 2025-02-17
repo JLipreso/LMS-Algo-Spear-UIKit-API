@@ -1,4 +1,6 @@
 import ls from 'localstorage-slim';
+import { printDevLog } from './console';
+import { toRaw } from 'vue';
 
 export function isAuthenticated() {
 
@@ -15,7 +17,9 @@ export function lsSetUser(user: any) {
     return ls.set('jl-ls-user', user, { encrypt: true });
 }
 export function lsGetUser() {
-    return ls.get('jl-ls-user', { decrypt: true });
+    const user = ls.get('jl-ls-user', { decrypt: true });
+    printDevLog("Get User:", toRaw(user));
+    return user;
 }
 export function lsSetItem(key: string, value: any) {
     return ls.set(key, value, { encrypt: true });

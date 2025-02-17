@@ -50,11 +50,11 @@ export async function createAdmin({ firstname, lastname, email, password, confir
             });
         }
         else {
-            var admin_refid = createReferenceID('ADM');
+            var user_refid = createReferenceID('ADM');
             await queryInsertGetID({
                 connection: SystemConnections()['CONN_NPM_LMS'],
                 table: 'users_admin',
-                columns: { admin_refid, firstname, lastname, email, password, created_by }
+                columns: { user_refid, firstname, lastname, email, password, created_by }
             }).then( async (response) => {
                 return resolve(response);
             });
