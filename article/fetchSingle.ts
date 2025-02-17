@@ -18,3 +18,17 @@ export async function fetchSingleArticle({ article_refid }:FetchSingleArticlePro
         });
     });
 }
+
+export async function fetchSingleArticleByTopic(topic_refid: String):Promise<any> {
+    return new Promise( async (resolve) => {
+        await queryFetchSingle({
+            connection: SystemConnections()['CONN_NPM_LMS'],
+            table: 'article',
+            where: [
+                ['topic_refid', topic_refid]
+            ]
+        }).then( async (response) => {
+            return resolve(response);
+        });
+    });
+}
