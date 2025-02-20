@@ -1,6 +1,7 @@
-import { SystemConnections } from "../config";
+import { APIHost, SystemConnections } from "../config";
 import { queryInsertGetID } from "../query/insertGetID";
 import { createReferenceID } from "../utility/reference_id";
+import axios from "axios";
 
 export type StudentQuizCreateProps = {
     user_refid: string,
@@ -11,17 +12,30 @@ export type StudentQuizCreateProps = {
 export async function createStudentQuiz({ user_refid, user_name, quiz_json }:StudentQuizCreateProps):Promise<any> {
     return new Promise( async (resolve) => {
         
-            var quiz_refid  = createReferenceID('SQZ');
             var total       = 100;
             var score       = 45;
 
-            await queryInsertGetID({
-                connection: SystemConnections()['CONN_NPM_LMS'],
-                table: 'questionnaire',
-                columns: { quiz_refid, user_refid, user_name, quiz_json, total, score }
-            }).then( async (response) => {
-                return resolve(response);
-            });
-        
+            try {
+                const response = await axios.post(APIHost() + "util_quiz/saveQuize", {
+                    user_refid: user_refid,
+                    user_name: user_name,
+                    quiz_json: JSON.stringify(quiz_json),
+                    total: total,
+                    score: score
+                });
+                console.log(response);
+                return resolve({
+                    success: false,
+                    message: response.data
+                });
+            }
+            catch(error: any) {
+                console.log(error);
+                return resolve({
+                    success: false,
+                    message: error.response.data
+                });
+            }  
     });
 }
+
