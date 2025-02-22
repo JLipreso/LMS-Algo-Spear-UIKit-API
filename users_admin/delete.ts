@@ -11,7 +11,7 @@ export async function deleteAdmin({ admin_refid }:DeleteAdminProps ):Promise<any
             connection: SystemConnections()['CONN_NPM_LMS'],
             table: 'users_admin',
             where: [
-                ['admin_refid', admin_refid]
+                ['user_refid', admin_refid]
             ],
         }).then( async (response) => {
             return resolve(response);

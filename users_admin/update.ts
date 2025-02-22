@@ -2,7 +2,7 @@ import { SystemConnections } from "../config";
 import { queryUpdate } from "../query/update";
 
 export type AdminUpdateProps = {
-    admin_refid: String,
+    user_refid: String,
     firstname: String,
     lastname: String,
     email: String,
@@ -11,7 +11,7 @@ export type AdminUpdateProps = {
     active: Number
 };
 
-export async function updateAdmin({ admin_refid, firstname, lastname, email, password, confirm_password, active }:AdminUpdateProps):Promise<any> {
+export async function updateAdmin({ user_refid, firstname, lastname, email, password, confirm_password, active }:AdminUpdateProps):Promise<any> {
     return new Promise( async (resolve) => {
         if(firstname == '') {
             return resolve({
@@ -54,7 +54,7 @@ export async function updateAdmin({ admin_refid, firstname, lastname, email, pas
                 connection: SystemConnections()['CONN_NPM_LMS'],
                 table: 'users_admin',
                 where: [
-                    ['admin_refid', admin_refid]
+                    ['user_refid', user_refid]
                 ],
                 columns: [
                     {'firstname':firstname},
