@@ -1,7 +1,6 @@
 import { SystemConnections } from "../config";
 import { queryCount } from "../query/count";
 import { queryInsertGetID } from "../query/insertGetID";
-import { printDevLog } from "../utility/console";
 
 export type ArticleReadsCreateProps = {
     article_refid: string,
@@ -25,12 +24,18 @@ export async function createReadLogs({ article_refid, topic_refid, user_refid }:
                     connection: SystemConnections()['CONN_NPM_LMS'],
                     table: 'article_reads',
                     columns: { article_refid, topic_refid, user_refid }
-                }).then( async (response) => {
-                    return resolve(response);
+                }).then( async () => {
+                    return resolve({
+                        success: true,
+                        message: "Record created"
+                    });
                 });
             }
             else {
-                printDevLog("Action:", "Record exist");
+                return resolve({
+                    success: false,
+                    message: "Record exist"
+                });
             }
         });
     });
