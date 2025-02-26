@@ -91,7 +91,7 @@ export async function fetchAllArticlesQueues():Promise<any> {
     });
 }
 
-export async function fetchAllArticlesSorting():Promise<any> {
+export async function fetchAllArticlesGraphs():Promise<any> {
     return new Promise( async (resolve) => {
         await queryFetchAll({
             connection: SystemConnections()['CONN_NPM_LMS'],
@@ -106,13 +106,28 @@ export async function fetchAllArticlesSorting():Promise<any> {
     });
 }
 
-export async function fetchAllArticlesGraphs():Promise<any> {
+export async function fetchAllArticlesSorting():Promise<any> {
     return new Promise( async (resolve) => {
         await queryFetchAll({
             connection: SystemConnections()['CONN_NPM_LMS'],
             table: 'article_topic',
             where: [
-                ['group_code', 'GRAPHS']
+                ['group_code', 'SORTING']
+            ],
+            orderby: ['sort', 'asc']
+        }).then( async (response) => {
+            return resolve(response);
+        });
+    });
+}
+
+export async function fetchAllArticlesSearching():Promise<any> {
+    return new Promise( async (resolve) => {
+        await queryFetchAll({
+            connection: SystemConnections()['CONN_NPM_LMS'],
+            table: 'article_topic',
+            where: [
+                ['group_code', 'SEARCH']
             ],
             orderby: ['sort', 'asc']
         }).then( async (response) => {

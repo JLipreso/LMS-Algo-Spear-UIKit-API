@@ -1,13 +1,12 @@
 import Swal from "sweetalert2";
-import { SystemConnections } from "../config";
-import { queryDelete } from "../query/delete";
+import { queryURL } from "../query/url";
 
 export type ResetReadingTimeProps = {
     user_refid: string,
-    articles: string[]
+    group_code: string
 };
 
-export async function resetReadingTime({ user_refid, articles }:ResetReadingTimeProps):Promise<any> {
+export async function resetReadingTimeByGroup({ user_refid, group_code }:ResetReadingTimeProps):Promise<any> {
     return new Promise( async (resolve) => {
         Swal.fire({
             title: "Confirmation",
@@ -17,27 +16,12 @@ export async function resetReadingTime({ user_refid, articles }:ResetReadingTime
             confirmButtonText: "Reset"
         }).then( async (result) => {
             if(result.isConfirmed) {
-                var list = [] as any;
-                for(let i = 0; i < articles.length; i++) {
-                    await queryDelete({
-                        connection: SystemConnections()['CONN_NPM_LMS'],
-                        table: 'article_reads',
-                        where: [
-                            ['user_refid', user_refid],
-                            ['article_refid', articles[i]]
-                        ]
-                    }).then( async (response) => {
-                        list.push(response);
-                    });
-                }
-                return resolve({
-                    success: true
+                await queryURL({ url: "util_quiz/resetReading?user_refid="+ user_refid +"&group_code=" + group_code }).then( async (response) => {
+                    return resolve(response);
                 });
             }
             else {
-                return resolve({
-                    success: false
-                });
+                return resolve({success: false });
             }
         });
     });

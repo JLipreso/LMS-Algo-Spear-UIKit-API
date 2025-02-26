@@ -1,6 +1,7 @@
 import { SystemConnections } from "../config";
 import { queryCount } from "../query/count";
 import { queryFetchAll } from "../query/fetchAll";
+import { queryURL } from "../query/url";
 
 export async function isFundamentalDone(user_refid: string):Promise<any> {
     return new Promise( async (resolve) => {
@@ -91,44 +92,11 @@ export async function isParentArticleDone(user_refid: string, article_refid: str
 
 export async function isArticleGroupDone(user_refid: string, group_code: string):Promise<any> {
     return new Promise( async (resolve) => {
-        await queryFetchAll({
-            connection: SystemConnections()['CONN_NPM_LMS'],
-            table: 'article_topic',
-            where: [
-                ['group_code', group_code]
-            ],
-            orderby: ['sort', 'asc']
-            }).then( async (topics) => {
-                if(topics == 0) {
-                    return resolve({
-                        success: false,
-                        message: "Article group has no content yet."
-                    });
-                }
-                else {
-                    for(let i = 0; i < topics.length; i++) {
-                        await queryCount({
-                            connection: SystemConnections()['CONN_NPM_LMS'],
-                            table: 'article_reads',
-                            where: [
-                                ['topic_refid', topics[i]?.topic_refid],
-                                ['user_refid', user_refid]
-                            ]
-                        }).then( async (read) => {
-                            if(read == 0) {
-                                return resolve({
-                                    success: false,
-                                    message: "<p>Please read <span class='text-danger'>" + topics[i]?.name + "</span> first.</p>"
-                                });
-                            }
-                        });
-                    }
-                    return resolve({
-                        success: true,
-                        message: "Done"
-                    });
-                }
-            });
+        await queryURL({
+            url: "util_quiz/checkReads?user_refid="+user_refid+"&group_code=" + group_code
+        }).then( async (response) => {
+            return resolve(response);
+        });
     });
 }
 
