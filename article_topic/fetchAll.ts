@@ -91,6 +91,21 @@ export async function fetchAllArticlesQueues():Promise<any> {
     });
 }
 
+export async function fetchAllArticlesSorting():Promise<any> {
+    return new Promise( async (resolve) => {
+        await queryFetchAll({
+            connection: SystemConnections()['CONN_NPM_LMS'],
+            table: 'article_topic',
+            where: [
+                ['group_code', 'GRAPHS']
+            ],
+            orderby: ['sort', 'asc']
+        }).then( async (response) => {
+            return resolve(response);
+        });
+    });
+}
+
 export async function fetchAllArticlesGraphs():Promise<any> {
     return new Promise( async (resolve) => {
         await queryFetchAll({
