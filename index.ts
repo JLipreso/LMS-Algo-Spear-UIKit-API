@@ -19,6 +19,7 @@ export * from './query/update';
 export * from './query/url';
 export * from './questionnaire/create';
 export * from './questionnaire/update';
+export * from './questionnaire/fetchAll';
 export * from './questionnaire/fetchPaginate';
 export * from './questionnaire_category/fetchAll';
 export * from './utility/console';
